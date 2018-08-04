@@ -1,0 +1,66 @@
+﻿@model Untt_test.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Регистрация";
+}
+@Scripts.Render("~/bundles/jquery")
+<div class="container">
+   
+    <div class="panel panel-default" style="width: 340px; font: 20px">
+        <div class="panel-heading">Регистрация</div>
+        <div class="panel-body">
+            <div>Для участия в мероприятии, вам необходимо</div>
+            <div>заполнить, ниже перечисленные поля </div>
+            <br>
+            <div>Обращаем ваше внимание, на то что все поля</div>
+            <div>являются обязательными для заполнения </div>
+            <br>
+            <form>
+                <div class="form-group" action="Account/Register" method="POST">
+                    <label for="formGroupExampleInput">ФИО</label>
+                    <input type="text" class="form-control" name="fio" id="formGroupExampleInput">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Адрес электронной почты</label>
+                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputTelephone">Контактный телефон</label>
+                    <input type="tel" id="UserMobile" name="phone"  maxlength="10" data-fv-numeric="true" data-fv-phone-country11="IN" required="required" data-fv-notempty-message="This field cannot be left blank." class="form-control"  data-fv-field="data[User][mobile]">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Согласен c <a>условиями</a></label>
+                </div>
+                <button type="submit"  class="btn btn-primary">Отправить</button>
+            </form>
+
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+   // $(document).ready(function () {      
+   //     debugger
+
+   //     $(":button").click(function ()
+   //{
+     
+   //     $.ajax({
+   //         url: 'Account/Register/',
+   //         data: { flag: "plus" },
+   //         type: 'POST',
+   //         contentType: 'application/json; charset=utf-8',
+   //         success: function (response) {              
+   //         }        
+
+   // });
+   // });
+   // });
+  </script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

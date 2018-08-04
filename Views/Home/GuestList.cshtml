@@ -1,0 +1,53 @@
+﻿
+@model IEnumerable<Untt_test.Models.Guest> 
+
+
+
+    @foreach (var it in ViewData["guest"] as IList<Untt_test.Models.Guest>)
+    {
+        <div class="card card-block" style="border: 2px solid gray; width: 600px; border-radius: 10px;">
+            <div class=" card-body">
+                <div class="row">
+                    <div class="col-md-10">
+
+                        <h5 class="card-title" style="padding:3px">@it.fio</h5>
+                        <p class="card-text" >
+
+                            @it.email<br>
+                            @it.phone<br>
+                        </p>
+
+                    </div>
+                    <div class="col-md-2">                       
+                         @{
+                                if (it.flag == "0")
+                                {
+                                    <div class="btn-group-vertical pull-right">
+                                        <button type="button" class="btn btn-green glyphicon-plus" style="border: 1px solid green; padding: 8px; margin-right: 2px"></button>
+                                        <button type="button" class="btn  btn-green " style="border: 1px solid green; padding: 8px;"></button>
+                                    </div>
+                                }
+                                if (it.flag == "1")
+                                { 
+                                    <div class="btn-group-vertical pull-right">
+                                    <button type="button" class="btn btn-red " style="border: 2px solid red; padding: 10px; margin-right: 2px"></button>
+                                    <button type="button" class="btn  btn-red  glyphicon-minus" style="border: 2px solid red; padding: 10px; margin-right: 2px"></button>
+                                   </div>
+                                }
+                                if (it.flag == "2")
+                                {
+                                    <div class="btn-group-vertical pull-right">
+                                        <button id="pl" type="button" class="btn glyphicon-plus btn-sm" style="padding-bottom: 0px; margin-right: 2px"></button>
+                                        <button id="mu"  type="button" class="btn  glyphicon-minus  btn-sm" style="padding-bottom: 0px;  margin-right: 2px"></button>
+                                    </div>
+                                }
+}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <br>
+    }
+@*<button type="button" class="btn  glyphicon-plus " style="border: 2px solid gray; padding: 14px; margin-right: 2px"></button>*@
+@*<button type="button" class="btn" style="border: 2px solid gray; padding: 14px; margin-right: 2px">-</button>*@
