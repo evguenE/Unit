@@ -142,15 +142,15 @@ namespace Untt_test.Controllers
           
             if (model.Fio != null)
             {
-                    using (tempdbEntities ent = new tempdbEntities())
+                    using (tempdbEntities2 ent = new tempdbEntities2())
                     {           
                 
-                        GuestList gs = new GuestList();
+                        Guests gs = new Guests();
                         gs.fio = model.Fio;
                         gs.email = model.Email;
                         gs.phone = model.Phone;
                         gs.flag = "2";
-                        ent.GuestList.Add(gs);
+                        ent.Guests.Add(gs);
                         ent.SaveChanges();
                 
                     }                                          

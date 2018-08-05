@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Untt_test.Models.Guest>
+﻿@model IEnumerable<Untt_test.Models.GuestList>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -60,7 +60,7 @@
                 </form>
                 
                 <div id="gl">              
-                    @foreach (var it in ViewData["index"] as IList<Untt_test.Models.Guest>)
+                    @foreach (var it in ViewData["index"] as IList<Untt_test.Models.GuestList>)
                     {
                         <div class="card card-block" style="border: 2px solid gray; width: 600px; border-radius: 10px;">
                             <div class=" card-body">
