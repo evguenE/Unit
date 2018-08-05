@@ -10,11 +10,12 @@ namespace Untt_test.Controllers
     public class HomeController : Controller
     {
         tempdbEntities2 ef = new tempdbEntities2();
+        IList<GuestList> guestList = null;
 
         public ActionResult Index()
         {
 
-            IList<GuestList> guestList = new List<GuestList>();
+            guestList = new List<GuestList>();
             using (tempdbEntities2 ent = new tempdbEntities2())
             {
                 var res = ent.Guests.OrderBy(x => x.Id).Select(r => new { Id = r.Id, fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
@@ -45,7 +46,7 @@ namespace Untt_test.Controllers
 
         public ActionResult GuestList(string flag, int id = 0)
         {
-            IList<GuestList> guestList = new List<GuestList>();
+          
 
             if (flag == "btn-primary")
             {
@@ -62,33 +63,38 @@ namespace Untt_test.Controllers
                     }                                                           
                 }
             }
-            
-            if (flag == "btn glyphicon-plus btn-sm")
-            {
-                using (tempdbEntities2 ent = new tempdbEntities2())
-                {
-                    Guests updatedGuestListPlus = (from c in ent.Guests
-                                                 where c.Id == id
-                                                 select c).FirstOrDefault();
-                    
-                    updatedGuestListPlus.flag = "0";
-                    ent.SaveChanges();
 
-                }
-            }
+          
 
             if (flag == "btn glyphicon-minus btn-sm")
             {
                 using (tempdbEntities2 ent = new tempdbEntities2())
                 {
-                    Guests updatedGuestListMinus = (from c in ent.Guests
-                                                  where c.Id == id
-                                                  select c).FirstOrDefault();
-                    updatedGuestListMinus.flag = "1";
+                    Guests up = (from c in ent.Guests
+                                 where c.Id == id
+                                 select c).FirstOrDefault();
+
+                    up.flag = "1";
                     ent.SaveChanges();
                 }
-            
+               
             }
+
+            if (flag == "btn glyphicon-plus btn-sm")
+            {
+                using (tempdbEntities2 ent = new tempdbEntities2())
+                {
+                    Guests updatedGuestListPlus = (from c in ent.Guests
+                                                   where c.Id == id
+                                                   select c).FirstOrDefault();
+
+                    updatedGuestListPlus.flag = "0";
+                    ent.SaveChanges();
+
+                }
+            }           
+
+
             if (flag == "btn btn-default")
             {
                 //IList<GuestList> guestList = new List<GuestList>();
@@ -101,14 +107,16 @@ namespace Untt_test.Controllers
 
             }
 
-          
-            var result = ef.Guests.OrderBy(x => x.Id).Select(r => new { fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
+            guestList = null;
+             guestList = new List<GuestList>(); 
+
+            var result = ef.Guests.OrderBy(x => x.Id).Select(r => new {Id =r.Id, fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
 
             if (flag == "0" || flag == "1")
-                result = ef.Guests.Where(o => o.flag == flag).OrderBy(x => x.Id).Select(r => new { fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
+                result = ef.Guests.Where(o => o.flag == flag).OrderBy(x => x.Id).Select(r => new { Id = r.Id, fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
 
             foreach (var item in result)
-                guestList.Add(new GuestList() { fio = item.fio, email = item.email, phone = item.phone, flag = item.flag });
+                guestList.Add(new GuestList() {Id = item.Id , fio = item.fio, email = item.email, phone = item.phone, flag = item.flag });
 
             ViewData["guest"] = guestList;
 

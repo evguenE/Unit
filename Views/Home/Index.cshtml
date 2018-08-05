@@ -98,7 +98,7 @@
                                 {
                                     <div class="btn-group-vertical pull-right">
                                         <button id="#plus" type="button" class="btn glyphicon-plus btn-sm" value=@it.Id  style="padding-bottom: 0px; margin-right: 2px"></button>
-                                        <button id="minus" type="button" class="btn glyphicon-minus btn-sm" value=@it.Id style="padding-bottom: 0px;  margin-right: 2px"></button>
+                                        <button id="minus" type="button" class="btn glyphicon-minus btn-sm" value=@it.Id style="padding-bottom: 0px; margin-right: 2px"></button>
                                     </div>
                                 }
                             }
@@ -133,24 +133,42 @@
 <script>
     $(document).ready(function () {      
 
-        $(":button").each(function (i, el) {
-            var cl = el.className;
-            debugger
-            var val = el.value;
-            $(el).on('click', function (i,e) {
-                debugger
+        //$(":button").each(function (i, el) {
+        //    var cl = el.className;
+          
+        //    var val = el.value;
+        //    $(el).on('click', function (event) {
+        //        alert(event.data)
+        //        $.ajax({
+        //            url: 'Home/GuestList/',
+        //            data: { flag: cl, id: val   },
+        //            type: 'GET',
+        //            contentType: 'application/json; charset=utf-8',
+        //            success: function (response) {
+        //                $('#gl').html(response);
+        //            }
+        //        });          
+        //    })
+        //});
+        
+        $(this).click("button", function (i, el) {
+           
+            var cl = i.target.attributes['0'].textContent;
+            var val = i.target.value;
+
+               
                 $.ajax({
                     url: 'Home/GuestList/',
-                    data: { flag: cl , id: val   },
+                    data: { flag: cl, id: val   },
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
                     success: function (response) {
                         $('#gl').html(response);
                     }
                 });          
-            })
+
         });
-        
+
         $("search").click(function () {
             debugger
             $.ajax({
