@@ -92,7 +92,9 @@ namespace Untt_test.Controllers
            
             var result = ef.Guests.OrderBy(x => x.Id).Select(r => new { r.Id, r.fio, r.email, r.phone,  r.flag }).ToList();
 
-            if (flag == "0" || flag == "1")
+            if (flag == "0")
+                result = ef.Guests.Where(o => o.flag == flag).OrderBy(x => x.Id).Select(r => new { r.Id, r.fio, r.email, r.phone, r.flag }).ToList();
+            if(flag == "1")
                 result = ef.Guests.Where(o => o.flag == flag).OrderBy(x => x.Id).Select(r => new { r.Id, r.fio, r.email, r.phone, r.flag }).ToList();
 
             foreach (var item in result)
