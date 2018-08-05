@@ -11,22 +11,18 @@ namespace Untt_test.Controllers
     {
         tempdbEntities2 ef = new tempdbEntities2();
         IList<GuestList> guestList = null;
-
         public ActionResult Index()
         {
-
-            guestList = new List<GuestList>();
+            IList<GuestList>  guestList = new List<GuestList>();
             using (tempdbEntities2 ent = new tempdbEntities2())
             {
                 var res = ent.Guests.OrderBy(x => x.Id).Select(r => new { Id = r.Id, fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
-
                 foreach (var item in res)
                     guestList.Add(new GuestList() { Id = item.Id, fio = item.fio, email = item.email, phone = item.phone, flag = item.flag });
 
                 ViewData["guest"] = guestList;
             }
-            return View();
-        
+            return View();        
         }
 
         public ActionResult About()
@@ -47,7 +43,6 @@ namespace Untt_test.Controllers
         public ActionResult GuestList(string flag, int id = 0, string ser = null )
         {
           
-
             if (flag == "btn-primary")
             {
                 using (tempdbEntities2 ent = new tempdbEntities2())
@@ -63,9 +58,7 @@ namespace Untt_test.Controllers
                     }                                                           
                 }
             }
-
           
-
             if (flag == "btn glyphicon-minus btn-sm")
             {
                 using (tempdbEntities2 ent = new tempdbEntities2())
@@ -93,13 +86,14 @@ namespace Untt_test.Controllers
 
                 }
             }
+
             guestList = null;
             guestList = new List<GuestList>();
-
-            var result = ef.Guests.OrderBy(x => x.Id).Select(r => new { Id = r.Id, fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
+           
+            var result = ef.Guests.OrderBy(x => x.Id).Select(r => new { r.Id, r.fio, r.email, r.phone,  r.flag }).ToList();
 
             if (flag == "0" || flag == "1")
-                result = ef.Guests.Where(o => o.flag == flag).OrderBy(x => x.Id).Select(r => new { Id = r.Id, fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
+                result = ef.Guests.Where(o => o.flag == flag).OrderBy(x => x.Id).Select(r => new { r.Id, r.fio, r.email, r.phone, r.flag }).ToList();
 
             foreach (var item in result)
                 guestList.Add(new GuestList() { Id = item.Id, fio = item.fio, email = item.email, phone = item.phone, flag = item.flag });
@@ -110,8 +104,7 @@ namespace Untt_test.Controllers
             if (flag == "btn btn-default")
             {
                 guestList = null;
-                guestList = new List<GuestList>();
-                
+                   guestList = new List<GuestList>();
                 var re = ef.Guests.Where(x =>( x.fio.StartsWith(ser) || x.email.StartsWith(ser) || x.phone.StartsWith(ser)));
                 foreach (var item in re)
                     guestList.Add(new GuestList() { Id = item.Id, fio = item.fio, email = item.email, phone = item.phone, flag = item.flag});            
