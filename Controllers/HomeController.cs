@@ -44,7 +44,7 @@ namespace Untt_test.Controllers
         }
             
 
-        public ActionResult GuestList(string flag, int id = 0)
+        public ActionResult GuestList(string flag, int id = 0, string ser = null )
         {
           
 
@@ -92,33 +92,33 @@ namespace Untt_test.Controllers
                     ent.SaveChanges();
 
                 }
-            }           
-
-
-            if (flag == "btn btn-default")
-            {
-                //IList<GuestList> guestList = new List<GuestList>();
-              
-                //var re = ef.Guests.Where(x => x.fio.StartsWith("Петр"));
-                //foreach (var item in re)
-                //    guestList.Add(new GuestList() { fio = item.fio, email = item.email, phone = item.phone, flag = item.flag});            
-
-                //ViewData["guest"] = guestList;                                
-
             }
-
             guestList = null;
-             guestList = new List<GuestList>(); 
+            guestList = new List<GuestList>();
 
-            var result = ef.Guests.OrderBy(x => x.Id).Select(r => new {Id =r.Id, fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
+            var result = ef.Guests.OrderBy(x => x.Id).Select(r => new { Id = r.Id, fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
 
             if (flag == "0" || flag == "1")
                 result = ef.Guests.Where(o => o.flag == flag).OrderBy(x => x.Id).Select(r => new { Id = r.Id, fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
 
             foreach (var item in result)
-                guestList.Add(new GuestList() {Id = item.Id , fio = item.fio, email = item.email, phone = item.phone, flag = item.flag });
+                guestList.Add(new GuestList() { Id = item.Id, fio = item.fio, email = item.email, phone = item.phone, flag = item.flag });
 
             ViewData["guest"] = guestList;
+
+
+            if (flag == "btn btn-default")
+            {
+                guestList = null;
+                guestList = new List<GuestList>();
+                
+                var re = ef.Guests.Where(x => x.fio.StartsWith(ser));
+                foreach (var item in re)
+                    guestList.Add(new GuestList() { Id = item.Id, fio = item.fio, email = item.email, phone = item.phone, flag = item.flag});            
+
+                ViewData["guest"] = guestList;                                
+
+            }           
 
             return PartialView(); 
         }       
