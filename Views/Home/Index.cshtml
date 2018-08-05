@@ -131,9 +131,10 @@
 
         $(":button").each(function (i, el) {
             var cl = el.className;
-           
+            
             var val = el.value;
-            $(el).on('click',function() {            
+            $(el).on('click', function () {
+                debugger
                 $.ajax({
                     url: 'Home/GuestList/',
                     data: { flag: cl , id: val   },

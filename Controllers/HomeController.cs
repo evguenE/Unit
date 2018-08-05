@@ -15,15 +15,15 @@ namespace Untt_test.Controllers
         {
 
             IList<GuestList> guestList = new List<GuestList>();
+            using (tempdbEntities2 ent = new tempdbEntities2())
+            {
+                var res = ent.Guests.OrderBy(x => x.Id).Select(r => new { Id = r.Id, fio = r.fio, email = r.email, phone = r.phone, flag = r.flag }).ToList();
 
-            var res = ef.Guests.OrderBy(x => x.Id).Select(r => new {Id = r.Id , fio =   r.fio, email = r.email,phone = r.phone, flag = r.flag }).ToList();
-            
+                foreach (var item in res)
+                    guestList.Add(new GuestList() { Id = item.Id, fio = item.fio, email = item.email, phone = item.phone, flag = item.flag });
 
-            foreach (var item in res)
-                guestList.Add(new GuestList() {Id= item.Id ,fio = item.fio, email = item.email, phone = item.phone, flag = item.flag });
-
-            ViewData["index"] = guestList;
-
+                ViewData["index"] = guestList;
+            }
             return View();
         
         }
