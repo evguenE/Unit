@@ -49,67 +49,15 @@
             <div class="col-md-8">
                 <form class="navbar-form">
                     <div class="input-group">
-                        <input type="text" id="search"  class="form-control" placeholder="Search"  name="search">
+                        <input type="text" id="search"  class="form-control" placeholder="Поиск гостей по ФИО, email, телефону"  name="search">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" value="0" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-default" value="0" type="button" name="btn"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
                     <br>
-
-
-                </form>
-                
-              
+                </form>                              
                 <div id="gl">
                     @{Html.RenderPartial("GuestList");}
-
-
-                    @*@foreach (var it in ViewData["guest"] as IList<Untt_test.Models.GuestList>)
-        {
-            <div class="card card-block" style="border: 2px solid gray; width: 600px; border-radius: 10px;">
-                <div class=" card-body">
-                    <div class="row">
-                        <div class="col-md-10">
-
-                            <h5 class="card-title" style="padding:3px">@it.fio</h5>
-                            <p class="card-text">
-                                @it.email<br>
-                                @it.phone<br>
-                            </p>
-
-                        </div>
-                        <div class="col-md-2">
-                            @{
-                                if (it.flag == "0")
-                                {
-                                    <div class="btn-group-vertical pull-right">
-                                        <button type="button" class="btn btn-green glyphicon-plus" style="border: 1px solid green; padding: 8px; margin-right: 2px"></button>
-                                        <button type="button" class="btn  btn-green " style="border: 1px solid green; padding: 8px;"></button>
-                                    </div>
-                                }
-                                if (it.flag == "1")
-                                {
-                                    <div class="btn-group-vertical pull-right">
-                                        <button type="button" class="btn btn-red " style="border: 2px solid red; padding: 10px; margin-right: 2px"></button>
-                                        <button type="button" class="btn  btn-red  glyphicon-minus" style="border: 2px solid red; padding: 10px; margin-right: 2px"></button>
-                                    </div>
-                                }
-                                if (it.flag == "2")
-                                {
-                                    <div class="btn-group-vertical pull-right">
-                                        <button id="#plus" type="button" class="btn glyphicon-plus btn-sm" value=@it.Id  style="padding-bottom: 0px; margin-right: 2px"></button>
-                                        <button id="minus" type="button" class="btn glyphicon-minus btn-sm" value=@it.Id style="padding-bottom: 0px; margin-right: 2px"></button>
-                                    </div>
-                                }
-                            }
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <br>
-        }*@
-
                 </div>
             </div>
             <div class="col-md-4">
@@ -122,7 +70,7 @@
 
         <div class="row">
             <div class="col-md-8">         
-                <button class="btn-primary">Закончить мероприятие</button> 
+                <button class="btn-primary" name="btn">Закончить мероприятие</button> 
          
             </div>          
         </div>
@@ -132,50 +80,23 @@
 
 <script>
     $(document).ready(function () {      
-
-        //$(":button").each(function (i, el) {
-        //    var cl = el.className;
-          
-        //    var val = el.value;
-        //    $(el).on('click', function (event) {
-        //        alert(event.data)
-        //        $.ajax({
-        //            url: 'Home/GuestList/',
-        //            data: { flag: cl, id: val   },
-        //            type: 'GET',
-        //            contentType: 'application/json; charset=utf-8',
-        //            success: function (response) {
-        //                $('#gl').html(response);
-        //            }
-        //        });          
-        //    })
-        //});
-
-      
-
-        $(this).click("button", function (i, el) {
+                 
+        $("button[name='btn']").click(function (i, el) {
            
-            var cl = i.target.attributes['0'].textContent;
-            var val = i.target.value;            
-            debugger
-            var se = $("#search").val();
-           
+                var cl = i.target.className;                                
+                var val = i.target.value;
+                var se = $("#search").val();              
 
-            $.ajax({
-
+                $.ajax({
                     url: 'Home/GuestList/',
-                    data: { flag: cl, id: val, ser: se},
+                    data: { flag: cl, id: val, ser: se },
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
                     success: function (response) {
                         $('#gl').html(response);
                     }
-                });          
-
-        });
-
-       
-
+                });                    
+        });       
 
         $('a[href="#allGuest"]').click(function () {            
             $.ajax({

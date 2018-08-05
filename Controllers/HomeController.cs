@@ -112,12 +112,11 @@ namespace Untt_test.Controllers
                 guestList = null;
                 guestList = new List<GuestList>();
                 
-                var re = ef.Guests.Where(x => x.fio.StartsWith(ser));
+                var re = ef.Guests.Where(x =>( x.fio.StartsWith(ser) || x.email.StartsWith(ser) || x.phone.StartsWith(ser)));
                 foreach (var item in re)
                     guestList.Add(new GuestList() { Id = item.Id, fio = item.fio, email = item.email, phone = item.phone, flag = item.flag});            
 
                 ViewData["guest"] = guestList;                                
-
             }           
 
             return PartialView(); 
