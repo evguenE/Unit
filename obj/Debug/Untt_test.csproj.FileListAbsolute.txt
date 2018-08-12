@@ -1,0 +1,11 @@
+D:\work22\Unit-New\bin\Untt_test.dll.config
+D:\work22\Unit-New\bin\Untt_test.dll
+D:\work22\Unit-New\bin\Untt_test.pdb
+D:\work22\Unit-New\bin\Microsoft.Web.Infrastructure.dll
+D:\work22\Unit-New\bin\Newtonsoft.Json.dll
+D:\work22\Unit-New\bin\Microsoft.Web.Infrastructure.xml
+D:\work22\Unit-New\obj\Debug\Untt_test.csprojAssemblyReference.cache
+D:\work22\Unit-New\obj\Debug\Untt_test.csproj.CoreCompileInputs.cache
+D:\work22\Unit-New\obj\Debug\Untt_test.csproj.CopyComplete
+D:\work22\Unit-New\obj\Debug\Untt_test.dll
+D:\work22\Unit-New\obj\Debug\Untt_test.pdb
